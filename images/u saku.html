@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>U Saku — Sacs Artisanaux de Luxe</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav class="nav" id="nav">
+    <div class="nav__logo">
+      <a href="index.html">U SAKU</a>
+    </div>
+    <div class="nav__links">
+      <a href="index.html" class="active">Accueil</a>
+      <a href="collection.html">Collection</a>
+      <a href="about.html">L'Atelier</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="nav__actions">
+      <button class="nav__cart" onclick="toggleCart()">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+      <button class="nav__burger" onclick="toggleMenu()" id="burger">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MENU MOBILE -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html" onclick="toggleMenu()">Accueil</a>
+    <a href="collection.html" onclick="toggleMenu()">Collection</a>
+    <a href="about.html" onclick="toggleMenu()">L'Atelier</a>
+    <a href="contact.html" onclick="toggleMenu()">Contact</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero__bg">
+      <div class="hero__overlay"></div>
+    </div>
+    <div class="hero__content">
+      <p class="hero__eyebrow">Artisanat d'Exception</p>
+      <h1 class="hero__title">L'Art du<br /><em>Sac Fait Main</em></h1>
+      <p class="hero__subtitle">Chaque pièce est unique, tricotée à la main avec passion.<br />Un savoir-faire artisanal au service de l'élégance.</p>
+      <div class="hero__ctas">
+        <a href="collection.html" class="btn btn--primary">Découvrir la Collection</a>
+        <a href="about.html" class="btn btn--ghost">Notre Histoire</a>
+      </div>
+    </div>
+    <div class="hero__scroll">
+      <span>Défiler</span>
+      <div class="hero__scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- BANDE SIGNATURE -->
+  <div class="ticker">
+    <div class="ticker__track">
+      <span>Fait Main &nbsp;·&nbsp; Unique &nbsp;·&nbsp; Artisanat Français &nbsp;·&nbsp; Livraison Offerte &nbsp;·&nbsp;</span>
+      <span>Fait Main &nbsp;·&nbsp; Unique &nbsp;·&nbsp; Artisanat Français &nbsp;·&nbsp; Livraison Offerte &nbsp;·&nbsp;</span>
+      <span>Fait Main &nbsp;·&nbsp; Unique &nbsp;·&nbsp; Artisanat Français &nbsp;·&nbsp; Livraison Offerte &nbsp;·&nbsp;</span>
+    </div>
+  </div>
+
+  <!-- INTRO MARQUE -->
+  <section class="brand-intro">
+    <div class="brand-intro__inner">
+      <div class="brand-intro__text">
+        <span class="label">U Saku</span>
+        <h2>Une philosophie<br /><em>de l'unique</em></h2>
+        <p>U Saku, c'est l'histoire d'une passion transmise au bout des doigts. Chaque sac naît d'une vision, d'un fil, et d'heures de création. Nos pièces ne se fabriquent pas — elles se révèlent.</p>
+        <a href="about.html" class="link-arrow">En savoir plus <span>→</span></a>
+      </div>
+      <div class="brand-intro__visual">
+        <div class="brand-intro__image-frame">
+          <img src="images/hero-bag.jpg" alt="Sac U Saku artisanal" />
+          <div class="brand-intro__badge">
+            <span>100%</span>
+            <span>Fait Main</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COLLECTION VEDETTE -->
+  <section class="featured" id="collection">
+    <div class="featured__header">
+      <span class="label">Nouvelle Collection</span>
+      <h2>Pièces d'Exception</h2>
+      <p>Des créations uniques, pensées pour sublimer chaque moment.</p>
+    </div>
+    <div class="featured__grid">
+
+      <div class="product-card" onclick="window.location='product.html?id=1'">
+        <div class="product-card__image">
+          <img src="images/bag1.jpg" alt="Le Bordeaux" />
+          <div class="product-card__overlay">
+            <button class="btn btn--white" onclick="event.stopPropagation(); addToCart('Le Bordeaux', 189)">Ajouter au Panier</button>
+            <a href="product.html?id=1" class="btn btn--ghost-white" onclick="event.stopPropagation()">Voir le produit</a>
+          </div>
+          <div class="product-card__badge">Bestseller</div>
+        </div>
+        <div class="product-card__info">
+          <span class="product-card__category">Sac à Main</span>
+          <h3 class="product-card__name">Le Bordeaux</h3>
+          <p class="product-card__price">189 €</p>
+        </div>
+      </div>
+
+      <div class="product-card" onclick="window.location='product.html?id=2'">
+        <div class="product-card__image">
+          <img src="images/bag2.jpg" alt="Le Camel Franges" />
+          <div class="product-card__overlay">
+            <button class="btn btn--white" onclick="event.stopPropagation(); addToCart('Le Camel Franges', 225)">Ajouter au Panier</button>
+            <a href="product.html?id=2" class="btn btn--ghost-white" onclick="event.stopPropagation()">Voir le produit</a>
+          </div>
+          <div class="product-card__badge">Exclusif</div>
+        </div>
+        <div class="product-card__info">
+          <span class="product-card__category">Hobo Bag</span>
+          <h3 class="product-card__name">Le Camel Franges</h3>
+          <p class="product-card__price">225 €</p>
+        </div>
+      </div>
+
+      <div class="product-card" onclick="window.location='product.html?id=3'">
+        <div class="product-card__image">
+          <img src="images/bag3.jpg" alt="L'Émeraude" />
+          <div class="product-card__overlay">
+            <button class="btn btn--white" onclick="event.stopPropagation(); addToCart('L\'Émeraude', 210)">Ajouter au Panier</button>
+            <a href="product.html?id=3" class="btn btn--ghost-white" onclick="event.stopPropagation()">Voir le produit</a>
+          </div>
+        </div>
+        <div class="product-card__info">
+          <span class="product-card__category">Tote Bag</span>
+          <h3 class="product-card__name">L'Émeraude</h3>
+          <p class="product-card__price">210 €</p>
+        </div>
+      </div>
+
+      <div class="product-card" onclick="window.location='product.html?id=4'">
+        <div class="product-card__image">
+          <img src="images/bag4.jpg" alt="Le Minuit" />
+          <div class="product-card__overlay">
+            <button class="btn btn--white" onclick="event.stopPropagation(); addToCart('Le Minuit', 195)">Ajouter au Panier</button>
+            <a href="product.html?id=4" class="btn btn--ghost-white" onclick="event.stopPropagation()">Voir le produit</a>
+          </div>
+          <div class="product-card__badge">Nouveau</div>
+        </div>
+        <div class="product-card__info">
+          <span class="product-card__category">Sac à Main</span>
+          <h3 class="product-card__name">Le Minuit</h3>
+          <p class="product-card__price">195 €</p>
+        </div>
+      </div>
+
+    </div>
+    <div class="featured__cta">
+      <a href="collection.html" class="btn btn--outline">Voir toute la Collection</a>
+    </div>
+  </section>
+
+  <!-- VALEURS -->
+  <section class="values">
+    <div class="values__inner">
+      <div class="value-item">
+        <div class="value-item__icon">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+        </div>
+        <h3>Fait avec Amour</h3>
+        <p>Chaque maille est posée avec soin et intention. Nos sacs sont le reflet d'une passion authentique.</p>
+      </div>
+      <div class="value-item">
+        <div class="value-item__icon">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <h3>Pièce Unique</h3>
+        <p>Aucun sac U Saku n'est identique. Chaque création porte en elle l'empreinte de son instant de naissance.</p>
+      </div>
+      <div class="value-item">
+        <div class="value-item__icon">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>Qualité Premium</h3>
+        <p>Matières sélectionnées avec exigence. Anses en bois, chaînes dorées, fils résistants — seul le meilleur.</p>
+      </div>
+      <div class="value-item">
+        <div class="value-item__icon">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        </div>
+        <h3>Livraison Offerte</h3>
+        <p>Livraison gratuite en France métropolitaine. Emballage cadeau soigné inclus à chaque commande.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BANNER MILIEU -->
+  <section class="mid-banner">
+    <div class="mid-banner__content">
+      <span class="label label--light">Commande Personnalisée</span>
+      <h2>Votre sac,<br /><em>votre couleur</em></h2>
+      <p>Vous avez une couleur ou un style en tête ? Contactez-nous pour une création sur mesure, pensée uniquement pour vous.</p>
+      <a href="contact.html" class="btn btn--primary">Commander sur Mesure</a>
+    </div>
+  </section>
+
+  <!-- AVIS CLIENTS -->
+  <section class="reviews">
+    <div class="reviews__header">
+      <span class="label">Témoignages</span>
+      <h2>Ce qu'elles en disent</h2>
+    </div>
+    <div class="reviews__grid">
+      <div class="review-card">
+        <div class="review-card__stars">★★★★★</div>
+        <p>"Mon sac bordeaux est absolument magnifique. La qualité est incroyable, on sent vraiment le travail artisanal. Je le porte partout et reçois des compliments à chaque sortie."</p>
+        <div class="review-card__author">
+          <div class="review-card__avatar">S</div>
+          <div>
+            <strong>Sofia M.</strong>
+            <span>Paris, France</span>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-card__stars">★★★★★</div>
+        <p>"J'ai commandé le sac vert émeraude et je suis sous le charme. L'emballage était soigné, la livraison rapide. Une marque que je recommande sans hésiter !"</p>
+        <div class="review-card__author">
+          <div class="review-card__avatar">L</div>
+          <div>
+            <strong>Laura K.</strong>
+            <span>Lyon, France</span>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-card__stars">★★★★★</div>
+        <p>"J'ai commandé un sac personnalisé dans mes couleurs préférées. Le résultat dépasse toutes mes attentes. Merci U Saku pour cette pièce unique !"</p>
+        <div class="review-card__author">
+          <div class="review-card__avatar">A</div>
+          <div>
+            <strong>Amira B.</strong>
+            <span>Marseille, France</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INSTAGRAM -->
+  <section class="instagram">
+    <div class="instagram__header">
+      <span class="label">Instagram</span>
+      <h2>@usaku_officiel</h2>
+      <p>Suivez nos créations en direct</p>
+    </div>
+    <div class="instagram__grid">
+      <div class="insta-tile"><img src="images/bag1.jpg" alt="Instagram U Saku" /><div class="insta-tile__hover"><svg width="24" height="24" viewBox="0 0 24 24" fill="white"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path fill="#1a1a1a" d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div></div>
+      <div class="insta-tile"><img src="images/bag2.jpg" alt="Instagram U Saku" /><div class="insta-tile__hover"><svg width="24" height="24" viewBox="0 0 24 24" fill="white"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/></svg></div></div>
+      <div class="insta-tile"><img src="images/bag3.jpg" alt="Instagram U Saku" /><div class="insta-tile__hover"><svg width="24" height="24" viewBox="0 0 24 24" fill="white"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/></svg></div></div>
+      <div class="insta-tile"><img src="images/bag4.jpg" alt="Instagram U Saku" /><div class="insta-tile__hover"><svg width="24" height="24" viewBox="0 0 24 24" fill="white"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/></svg></div></div>
+      <div class="insta-tile"><img src="images/bag5.jpg" alt="Instagram U Saku" /><div class="insta-tile__hover"><svg width="24" height="24" viewBox="0 0 24 24" fill="white"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/></svg></div></div>
+      <div class="insta-tile"><img src="images/bag6.jpg" alt="Instagram U Saku" /><div class="insta-tile__hover"><svg width="24" height="24" viewBox="0 0 24 24" fill="white"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/></svg></div></div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="newsletter">
+    <div class="newsletter__inner">
+      <span class="label label--light">Newsletter</span>
+      <h2>Restez dans<br /><em>la confidence</em></h2>
+      <p>Soyez la première informée des nouvelles créations, offres exclusives et coulisses de l'atelier.</p>
+      <form class="newsletter__form" onsubmit="subscribeNewsletter(event)">
+        <input type="email" placeholder="Votre adresse email" required />
+        <button type="submit" class="btn btn--primary">S'inscrire</button>
+      </form>
+      <p class="newsletter__legal">En vous inscrivant, vous acceptez de recevoir nos communications. Désabonnement possible à tout moment.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <h3>U SAKU</h3>
+        <p>L'art du sac fait main.<br />Chaque pièce raconte une histoire.</p>
+        <div class="footer__socials">
+          <a href="#" aria-label="Instagram">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="#" aria-label="TikTok">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/></svg>
+          </a>
+          <a href="#" aria-label="Facebook">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer__nav">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="collection.html">Collection</a></li>
+          <li><a href="about.html">L'Atelier</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer__nav">
+        <h4>Infos</h4>
+        <ul>
+          <li><a href="#">Livraison & Retours</a></li>
+          <li><a href="#">Taille & Guide</a></li>
+          <li><a href="#">Commande Personnalisée</a></li>
+          <li><a href="#">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer__nav">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:contact@usaku.fr">contact@usaku.fr</a></li>
+          <li><a href="#">Instagram</a></li>
+          <li>Réponse sous 24h</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p>© 2025 U Saku — Tous droits réservés</p>
+      <div class="footer__legal">
+        <a href="#">Mentions Légales</a>
+        <a href="#">Politique de Confidentialité</a>
+        <a href="#">CGV</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- PANIER SLIDE -->
+  <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="cart-drawer__header">
+      <h3>Mon Panier</h3>
+      <button onclick="toggleCart()">✕</button>
+    </div>
+    <div class="cart-drawer__items" id="cartItems">
+      <div class="cart-empty" id="cartEmpty">
+        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="1"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        <p>Votre panier est vide</p>
+        <a href="collection.html" class="btn btn--outline" onclick="toggleCart()">Découvrir la Collection</a>
+      </div>
+    </div>
+    <div class="cart-drawer__footer" id="cartFooter" style="display:none">
+      <div class="cart-total">
+        <span>Total</span>
+        <span id="cartTotal">0 €</span>
+      </div>
+      <button class="btn btn--primary" style="width:100%">Passer Commande</button>
+      <p class="cart-note">Livraison offerte · Emballage cadeau inclus</p>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

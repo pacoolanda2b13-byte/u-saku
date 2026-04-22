@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>U Saku — Sacs au Crochet Fait Main | Artisanat Corse</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --cream:#FAF6F0;--sand:#E8DFD3;--terracotta:#C4704B;--terracotta-dark:#A35A3A;
+  --olive:#6B7F5E;--olive-dark:#4A6741;--olive-deep:#2D3E28;
+  --navy:#1B2A3D;--navy-light:#2D4A5E;--charcoal:#2C2C2A;
+  --gold:#BFA370;--gold-light:#D4C49A;--white:#FFFFFF;--off-white:#F5F0EA;
+  --mer:#3B6B8A;--mer-deep:#1E3D52;
+  --terre:#8B6F47;--terre-deep:#5E4830;
+  --immortelle:#C8A84E;--immortelle-deep:#8B7030;
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'Outfit',system-ui,sans-serif;
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:var(--sans);color:var(--charcoal);background:var(--cream);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+button{cursor:pointer;border:none;background:none;font-family:var(--sans)}
+
+/* ═══ PRELOADER ═══ */
+.preloader{position:fixed;inset:0;background:var(--navy);z-index:9999;display:flex;align-items:center;justify-content:center;transition:opacity .8s ease,visibility .8s ease}
+.preloader.hidden{opacity:0;visibility:hidden;pointer-events:none}
+.preloader-text{font-family:var(--serif);color:var(--gold);font-size:clamp(2rem,5vw,3.5rem);letter-spacing:.3em;text-transform:uppercase;animation:pulse 1.5s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
+
+/* ═══ NAV ═══ */
+nav{position:fixed;top:0;left:0;width:100%;z-index:100;padding:1.5rem 3rem;display:flex;align-items:center;justify-content:space-between;transition:all .5s ease}
+nav.scrolled{background:rgba(250,246,240,.95);backdrop-filter:blur(20px);padding:1rem 3rem;box-shadow:0 1px 0 rgba(0,0,0,.06)}
+.nav-logo{font-family:var(--serif);font-size:1.6rem;font-weight:400;letter-spacing:.25em;text-transform:uppercase;color:var(--white);transition:color .5s}
+nav.scrolled .nav-logo{color:var(--navy)}
+.nav-links{display:flex;gap:2.5rem;align-items:center}
+.nav-links a{font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;font-weight:300;color:rgba(255,255,255,.85);transition:color .3s}
+nav.scrolled .nav-links a{color:var(--charcoal)}
+.nav-links a:hover{color:var(--terracotta)}
+.nav-cta{padding:.55rem 1.8rem;border:1px solid rgba(255,255,255,.5);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--white);transition:all .3s}
+nav.scrolled .nav-cta{border-color:var(--navy);color:var(--navy)}
+.nav-cta:hover{background:var(--navy);color:var(--white)!important;border-color:var(--navy)}
+.mobile-menu{display:none;flex-direction:column;gap:5px;cursor:pointer;z-index:101}
+.mobile-menu span{display:block;width:24px;height:1.5px;background:var(--white);transition:all .3s}
+nav.scrolled .mobile-menu span{background:var(--navy)}
+
+/* Mobile menu open state */
+.nav-links.show{
+  display:flex!important;flex-direction:column;position:fixed;top:0;left:0;width:100%;height:100vh;
+  background:var(--navy);justify-content:center;align-items:center;gap:2.5rem;z-index:100;
+  animation:menuFadeIn .4s ease}
+.nav-links.show a{color:rgba(255,255,255,.85)!important;font-size:1rem;letter-spacing:.3em}
+.nav-links.show .nav-cta{border-color:rgba(255,255,255,.4);color:var(--white)!important}
+@keyframes menuFadeIn{from{opacity:0}to{opacity:1}}
+
+/* ═══ HERO SLIDER ═══ */
+.hero-slider{position:relative;height:100vh;min-height:700px;overflow:hidden}
+.slider-track{display:flex;height:100%;transition:transform .9s cubic-bezier(.65,0,.35,1)}
+.slide{min-width:100%;height:100%;display:flex}
+
+.slide-visual{flex:0 0 58%;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.slide-visual-bg{position:absolute;inset:0;transition:opacity .6s ease}
+.slide-1 .slide-visual-bg{background:linear-gradient(135deg,var(--olive-dark) 0%,var(--olive-deep) 100%)}
+.slide-2 .slide-visual-bg{background:linear-gradient(135deg,var(--mer) 0%,var(--mer-deep) 100%)}
+.slide-3 .slide-visual-bg{background:linear-gradient(135deg,var(--terre) 0%,var(--terre-deep) 100%)}
+.slide-4 .slide-visual-bg{background:linear-gradient(135deg,var(--immortelle) 0%,var(--immortelle-deep) 100%)}
+
+.slide-texture{position:absolute;inset:0;opacity:.04;background-image:
+  radial-gradient(circle at 2px 2px,rgba(255,255,255,.5) 1px,transparent 0);background-size:24px 24px}
+
+/* Placeholder pour les photos — REMPLACER par vos images */
+.slide-photo-placeholder{position:relative;z-index:2;width:280px;height:340px;border:1.5px solid rgba(255,255,255,.2);
+  border-radius:6px 6px 20px 20px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:rgba(255,255,255,.06);backdrop-filter:blur(4px)}
+.slide-photo-placeholder::before{content:'';position:absolute;top:-28px;left:50px;right:50px;height:44px;
+  border:1.5px solid rgba(255,255,255,.2);border-bottom:none;border-radius:50px 50px 0 0}
+.slide-photo-name{font-family:var(--serif);font-size:2.2rem;color:rgba(255,255,255,.5);font-weight:300;font-style:italic}
+.slide-photo-hint{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-top:.8rem}
+
+/* SVG patterns per slide */
+.slide-pattern{position:absolute;inset:0;z-index:1;opacity:.05;pointer-events:none}
+
+.slide-info{flex:0 0 42%;padding:0 clamp(2rem,4vw,4rem);display:flex;flex-direction:column;justify-content:center;background:var(--cream)}
+.slide-tag{font-size:.6rem;letter-spacing:.35em;text-transform:uppercase;color:var(--terracotta);margin-bottom:1.2rem;font-weight:400}
+.slide-title{font-family:var(--serif);font-size:clamp(2rem,3.5vw,3.2rem);font-weight:300;color:var(--navy);line-height:1.15;margin-bottom:.8rem}
+.slide-desc{font-size:.9rem;line-height:1.8;color:#888;font-weight:300;margin-bottom:2rem;max-width:340px}
+.slide-price{font-family:var(--serif);font-size:1.8rem;font-weight:400;color:var(--terracotta);margin-bottom:2rem}
+.slide-btn{display:inline-flex;align-items:center;gap:.6rem;padding:.85rem 2.5rem;border:1px solid var(--navy);
+  background:transparent;font-family:var(--sans);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--navy);transition:all .4s;width:fit-content}
+.slide-btn:hover{background:var(--navy);color:var(--cream)}
+.slide-btn svg{width:14px;height:14px;transition:transform .3s}
+.slide-btn:hover svg{transform:translateX(4px)}
+
+/* Slider navigation */
+.slider-nav{position:absolute;bottom:2.5rem;left:58%;transform:translateX(calc(-50% + 21%));display:flex;gap:8px;z-index:10}
+.slider-dot{width:28px;height:2.5px;background:var(--sand);cursor:pointer;border:none;transition:all .4s;border-radius:2px}
+.slider-dot.active{background:var(--terracotta);width:48px}
+.slider-arrows{position:absolute;bottom:2rem;right:2.5rem;display:flex;gap:6px;z-index:10}
+.slider-arrow{width:44px;height:44px;border:1px solid var(--sand);background:var(--cream);
+  display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .3s;color:var(--charcoal)}
+.slider-arrow:hover{border-color:var(--terracotta);color:var(--terracotta)}
+.slider-arrow svg{width:16px;height:16px}
+
+/* ═══ MARQUEE ═══ */
+.marquee{background:var(--navy);padding:.9rem 0;overflow:hidden;white-space:nowrap}
+.marquee-inner{display:flex;gap:3rem;animation:scrollMarquee 30s linear infinite}
+.marquee-inner span{font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);font-weight:300;flex-shrink:0}
+.marquee-inner span::after{content:'◆';margin-left:3rem;opacity:.4;font-size:.5rem}
+@keyframes scrollMarquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ═══ SECTION COMMON ═══ */
+.section-padding{padding:clamp(4rem,10vw,8rem) clamp(2rem,5vw,6rem)}
+.section-label{font-size:.65rem;letter-spacing:.4em;text-transform:uppercase;color:var(--terracotta);font-weight:400;margin-bottom:1rem}
+.section-title{font-family:var(--serif);font-size:clamp(2rem,4vw,3.2rem);font-weight:300;color:var(--navy);line-height:1.2;margin-bottom:1.5rem}
+.section-text{font-size:.95rem;line-height:1.9;color:#666;font-weight:300;max-width:560px}
+.btn-primary{padding:.9rem 3rem;background:var(--terracotta);color:var(--white);font-size:.72rem;
+  letter-spacing:.22em;text-transform:uppercase;font-weight:400;transition:all .4s;border:1px solid var(--terracotta);display:inline-block}
+.btn-primary:hover{background:var(--terracotta-dark);border-color:var(--terracotta-dark);transform:translateY(-2px)}
+
+/* ═══ INTRO ═══ */
+.intro{display:grid;grid-template-columns:1fr 1fr;gap:clamp(3rem,6vw,6rem);align-items:center}
+.intro-visual{position:relative;aspect-ratio:4/5;background:var(--sand);border-radius:4px;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,.08)}
+/* <!-- PHOTO INTRO : remplacer le src ci-dessous par votre photo principale (800x1000px) --> */
+.intro-visual img{width:100%;height:100%;object-fit:cover;filter:contrast(1.1) brightness(1.05)}
+.intro-stat{display:flex;gap:3rem;margin-top:3rem}
+.intro-stat-item{text-align:left}
+.intro-stat-num{font-family:var(--serif);font-size:2.5rem;font-weight:300;color:var(--navy)}
+.intro-stat-label{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:#999;margin-top:.3rem;font-weight:300}
+
+/* ═══ PRODUCTS ═══ */
+.products-section{background:var(--white)}
+.products-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:4rem;flex-wrap:wrap;gap:2rem}
+.products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem}
+.product-card{position:relative;cursor:pointer}
+.product-image{aspect-ratio:3/4;background:var(--off-white);overflow:hidden;position:relative;margin-bottom:1.2rem;
+  display:flex;align-items:center;justify-content:center;transition:all .5s}
+.product-image::before{content:'';position:absolute;inset:0;border:1px solid rgba(191,163,112,.15);z-index:2;pointer-events:none;transition:border-color .3s}
+/* <!-- PHOTO PRODUIT : remplacer le src par votre photo de sac (800x1000px) --> */
+.product-image img{width:60%;height:60%;object-fit:cover;filter:contrast(1.15) brightness(1.05) saturate(1.1) drop-shadow(0 20px 30px rgba(0,0,0,.15));border-radius:4px;transition:all .5s}
+.product-card:hover .product-image img{transform:scale(1.05)}
+.product-card:hover .product-image::before{border-color:var(--gold)}
+.product-tag{position:absolute;top:1rem;left:1rem;background:var(--navy);color:var(--gold);font-size:.55rem;
+  letter-spacing:.2em;text-transform:uppercase;padding:.4rem .9rem;z-index:3;animation:tagShimmer 3s ease infinite}
+@keyframes tagShimmer{0%,100%{opacity:1}50%{opacity:.75}}
+.product-name{font-family:var(--serif);font-size:1.2rem;font-weight:400;color:var(--navy);margin-bottom:.3rem}
+.product-desc{font-size:.78rem;color:#999;font-weight:300;letter-spacing:.03em;margin-bottom:.5rem}
+.product-price{font-size:.85rem;color:var(--terracotta);font-weight:400;letter-spacing:.05em}
+.product-action{display:inline-flex;align-items:center;gap:.5rem;font-size:.68rem;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--navy);margin-top:.8rem;font-weight:400;opacity:0;transform:translateY(8px);transition:all .4s}
+.product-card:hover .product-action{opacity:1;transform:translateY(0)}
+.product-action-line{width:24px;height:1px;background:var(--navy);transition:width .3s}
+.product-card:hover .product-action-line{width:36px}
+
+/* ═══ CORSE INSPIRATION (NOUVEAU) ═══ */
+.corse-section{padding:0 clamp(2rem,5vw,6rem);margin-bottom:clamp(4rem,10vw,8rem)}
+.corse-header{text-align:center;padding:clamp(4rem,8vw,6rem) 0 3rem}
+.corse-grid{display:grid;grid-template-columns:1fr 1.3fr 1fr;gap:3px}
+.corse-card{position:relative;min-height:340px;padding:clamp(2rem,4vw,3rem);display:flex;flex-direction:column;
+  justify-content:flex-end;overflow:hidden;transition:transform .4s}
+.corse-card:hover{transform:scale(1.01)}
+.corse-card-1{background:var(--olive-dark)}
+.corse-card-2{background:var(--mer-deep)}
+.corse-card-3{background:var(--terre)}
+.corse-card-deco{position:absolute;top:24px;right:24px;opacity:.08;pointer-events:none}
+.corse-eyebrow{font-size:.55rem;letter-spacing:.35em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:.7rem;font-weight:400}
+.corse-title{font-family:var(--serif);font-size:clamp(1.4rem,2.5vw,1.9rem);font-weight:300;color:#fff;line-height:1.3;margin-bottom:.8rem}
+.corse-desc{font-size:.82rem;line-height:1.7;color:rgba(255,255,255,.6);font-weight:200;max-width:300px}
+
+/* ═══ PERSONNALISATION (NOUVEAU) ═══ */
+.custom-section{background:var(--sand)}
+.custom-inner{display:grid;grid-template-columns:1fr 1fr;gap:clamp(3rem,6vw,5rem);align-items:center}
+.custom-steps{display:flex;flex-direction:column;gap:2.5rem}
+.custom-step{display:flex;gap:1.5rem;align-items:flex-start}
+.custom-step-num{font-family:var(--serif);font-size:3rem;font-weight:200;color:var(--terracotta);line-height:1;flex-shrink:0;width:48px}
+.custom-step-content{}
+.custom-step-title{font-family:var(--serif);font-size:1.2rem;color:var(--navy);margin-bottom:.4rem;font-weight:400}
+.custom-step-desc{font-size:.82rem;line-height:1.7;color:#888;font-weight:300}
+
+/* ═══ STORY BANNER ═══ */
+.story-banner{position:relative;min-height:70vh;display:flex;align-items:center;background:var(--navy);overflow:hidden}
+.story-bg-pattern{position:absolute;inset:0;opacity:.03;background-image:
+  radial-gradient(circle at 2px 2px,rgba(255,255,255,.5) 1px,transparent 0);background-size:32px 32px}
+.story-content{display:grid;grid-template-columns:1fr 1fr;gap:clamp(3rem,6vw,6rem);align-items:center;
+  width:100%;max-width:1400px;margin:0 auto;padding:clamp(4rem,8vw,7rem) clamp(2rem,5vw,6rem)}
+.story-quote{font-family:var(--serif);font-size:clamp(1.5rem,3vw,2.4rem);font-weight:300;color:var(--white);line-height:1.5;font-style:italic}
+.story-quote::before{content:'\201C';font-size:5rem;color:var(--gold);line-height:0;vertical-align:middle;margin-right:.3rem;font-style:normal}
+.story-right .section-label{color:var(--gold)}
+.story-right .section-text{color:rgba(255,255,255,.6)}
+.story-values{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2.5rem}
+.value-item{padding:1.2rem;border:1px solid rgba(255,255,255,.08);transition:border-color .3s}
+.value-item:hover{border-color:var(--gold)}
+.value-num{font-family:var(--serif);font-size:1.8rem;color:var(--gold);font-weight:300;margin-bottom:.3rem}
+.value-text{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.5);font-weight:300}
+
+/* ═══ SAVOIR-FAIRE ═══ */
+.savoir-faire{background:var(--off-white)}
+.sf-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;margin-top:4rem}
+.sf-step{text-align:center;padding:3rem 1.5rem}
+.sf-num{font-family:var(--serif);font-size:5.5rem;font-weight:200;color:var(--sand);margin-bottom:1.5rem;line-height:1}
+.sf-name{font-family:var(--serif);font-size:2.2rem;color:var(--navy);margin-bottom:1rem;font-weight:300}
+.sf-desc{font-size:1.2rem;line-height:1.7;color:#777;font-weight:200}
+.sf-divider{width:30px;height:1px;background:var(--gold);margin:1rem auto}
+
+/* ═══ TESTIMONIALS ═══ */
+.testimonials{background:var(--white)}
+.test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:4rem}
+.test-card{padding:2.5rem;border:1px solid rgba(0,0,0,.06);transition:all .4s}
+.test-card:hover{border-color:var(--gold);transform:translateY(-4px)}
+.test-stars{color:var(--gold);letter-spacing:.2rem;margin-bottom:1rem;font-size:.9rem}
+.test-text{font-family:var(--serif);font-size:1.05rem;font-style:italic;color:#555;line-height:1.7;margin-bottom:1.5rem;font-weight:400}
+.test-author{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--terracotta);font-weight:400}
+.test-loc{font-size:.7rem;color:#aaa;margin-top:.2rem;font-weight:300}
+
+/* ═══ NEWSLETTER ═══ */
+.newsletter{background:var(--sand);text-align:center}
+.newsletter .section-title{margin-bottom:.8rem}
+.newsletter .section-text{margin:0 auto 2.5rem;text-align:center}
+.newsletter-form{display:flex;max-width:480px;margin:0 auto;gap:0}
+.newsletter-form input{flex:1;padding:1rem 1.5rem;border:1px solid rgba(0,0,0,.1);background:var(--white);
+  font-family:var(--sans);font-size:.85rem;font-weight:300;letter-spacing:.03em;border-right:none;outline:none}
+.newsletter-form input::placeholder{color:#bbb}
+.newsletter-form button{padding:1rem 2rem;background:var(--navy);color:var(--white);font-size:.68rem;
+  letter-spacing:.2em;text-transform:uppercase;font-weight:400;transition:background .3s;border:1px solid var(--navy)}
+.newsletter-form button:hover{background:var(--terracotta);border-color:var(--terracotta)}
+
+/* ═══ REASSURANCE ═══ */
+.reassurance{background:var(--white);border-top:1px solid rgba(0,0,0,.05)}
+.reas-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;text-align:center}
+.reas-item{padding:2rem 1rem}
+.reas-icon{font-size:2rem;color:var(--terracotta);margin-bottom:1.2rem}
+.reas-title{font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--navy);font-weight:400;margin-bottom:.8rem}
+.reas-desc{font-size:.82rem;color:#777;font-weight:300;line-height:1.7}
+
+/* ═══ FOOTER ═══ */
+footer{background:var(--navy);color:rgba(255,255,255,.5);padding:clamp(3rem,6vw,5rem) clamp(2rem,5vw,6rem) 2rem}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,.08)}
+.footer-brand{font-family:var(--serif);font-size:1.8rem;color:var(--white);letter-spacing:.2em;text-transform:uppercase;font-weight:300;margin-bottom:1rem}
+.footer-tagline{font-size:.85rem;line-height:1.8;font-weight:200;max-width:300px}
+.footer-col h4{font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem;font-weight:400}
+.footer-col a{display:block;font-size:.82rem;color:rgba(255,255,255,.5);margin-bottom:.6rem;font-weight:200;transition:color .3s}
+.footer-col a:hover{color:var(--white)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:2rem;font-size:.72rem;font-weight:200;flex-wrap:wrap;gap:1rem}
+.footer-social{display:flex;gap:1.5rem}
+.footer-social a{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;transition:color .3s}
+.footer-social a:hover{color:var(--gold)}
+
+/* ═══ BACK TO TOP ═══ */
+.back-top{position:fixed;bottom:2rem;right:2rem;width:44px;height:44px;background:var(--navy);color:var(--gold);
+  border:none;border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:90;
+  opacity:0;visibility:hidden;transition:all .4s;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.15)}
+.back-top.visible{opacity:1;visibility:visible}
+.back-top:hover{background:var(--terracotta);transform:translateY(-3px)}
+.back-top svg{width:18px;height:18px}
+
+/* ═══ REVEAL ═══ */
+.reveal{opacity:0;transform:translateY(40px);transition:all .9s cubic-bezier(.22,1,.36,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:1024px){
+  .intro,.story-content,.custom-inner{grid-template-columns:1fr}
+  .products-grid{grid-template-columns:repeat(2,1fr)}
+  .sf-grid{grid-template-columns:repeat(2,1fr)}
+  .test-grid{grid-template-columns:1fr}
+  .corse-grid{grid-template-columns:1fr}
+  .reas-grid{grid-template-columns:repeat(2,1fr)}
+  .footer-top{grid-template-columns:1fr 1fr}
+  .slide{flex-direction:column}
+  .slide-visual{flex:0 0 50%}
+  .slide-info{flex:0 0 50%;padding:2rem}
+  .slider-nav{left:50%;transform:translateX(-50%);bottom:calc(50% - 2rem)}
+  .slider-arrows{right:1rem;bottom:calc(50% + 1.5rem)}
+}
+@media(max-width:768px){
+  nav{padding:1rem 1.5rem}
+  .nav-links{display:none}
+  .mobile-menu{display:flex}
+  .products-grid{grid-template-columns:1fr}
+  .sf-grid{grid-template-columns:1fr}
+  .reas-grid{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr;gap:2rem}
+  .newsletter-form{flex-direction:column}
+  .newsletter-form input{border-right:1px solid rgba(0,0,0,.1);border-bottom:none}
+  .story-values{grid-template-columns:1fr}
+  .slide-info{padding:1.5rem}
+  .slide-title{font-size:1.8rem}
+  .custom-steps{gap:2rem}
+  .hero-slider{min-height:auto;height:auto}
+  .slide{min-height:100vh}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ PRELOADER ═══ -->
+<div class="preloader" id="preloader">
+  <span class="preloader-text">U Saku</span>
+</div>
+
+<!-- ═══ NAV ═══ -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">U Saku</a>
+  <div class="nav-links" id="navLinks">
+    <a href="#collection">Collection</a>
+    <a href="#savoir-faire">Savoir-faire</a>
+    <a href="#histoire">Notre histoire</a>
+    <a href="#temoignages">Avis</a>
+    <a href="#collection" class="nav-cta">Boutique</a>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- ═══ HERO SLIDER (NOUVEAU) ═══ -->
+<section class="hero-slider" id="heroSlider">
+  <div class="slider-track" id="sliderTrack">
+
+    <!-- SLIDE 1 — Maquis / Vert -->
+    <div class="slide slide-1">
+      <div class="slide-visual">
+        <div class="slide-visual-bg"></div>
+        <div class="slide-texture"></div>
+        <svg class="slide-pattern" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="200" cy="200" r="120" fill="none" stroke="white" stroke-width=".5" opacity=".5"/>
+          <circle cx="200" cy="200" r="80" fill="none" stroke="white" stroke-width=".5" opacity=".4"/>
+          <circle cx="200" cy="200" r="40" fill="none" stroke="white" stroke-width=".5" opacity=".3"/>
+          <path d="M200 80 Q240 140 200 200 Q160 140 200 80Z" fill="white" opacity=".08"/>
+          <path d="M200 320 Q160 260 200 200 Q240 260 200 320Z" fill="white" opacity=".08"/>
+          <path d="M80 200 Q140 160 200 200 Q140 240 80 200Z" fill="white" opacity=".08"/>
+          <path d="M320 200 Q260 240 200 200 Q260 160 320 200Z" fill="white" opacity=".08"/>
+        </svg>
+        <!-- PHOTO SLIDER 1 : remplacer ce placeholder par votre photo (1000x1200px) -->
+        <div class="slide-photo-placeholder">
+          <div class="slide-photo-name">A Machja</div>
+          <div class="slide-photo-hint">Photo du sac ici</div>
+        </div>
+      </div>
+      <div class="slide-info">
+        <div class="slide-tag">Collection maquis</div>
+        <h2 class="slide-title">A Machja</h2>
+        <p class="slide-desc">Cabas au crochet inspiré des collines parfumées du maquis. Coton naturel et lin, teintes vert sauge et crème.</p>
+        <div class="slide-price">120 €</div>
+        <button class="slide-btn">Découvrir <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 7h12M8 2l5 5-5 5"/></svg></button>
+      </div>
+    </div>
+
+    <!-- SLIDE 2 — Mer / Bleu -->
+    <div class="slide slide-2">
+      <div class="slide-visual">
+        <div class="slide-visual-bg"></div>
+        <div class="slide-texture"></div>
+        <svg class="slide-pattern" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 200 Q50 170 100 200 Q150 230 200 200 Q250 170 300 200 Q350 230 400 200" fill="none" stroke="white" stroke-width=".8" opacity=".4"/>
+          <path d="M0 230 Q50 200 100 230 Q150 260 200 230 Q250 200 300 230 Q350 260 400 230" fill="none" stroke="white" stroke-width=".5" opacity=".3"/>
+          <path d="M0 260 Q50 230 100 260 Q150 290 200 260 Q250 230 300 260 Q350 290 400 260" fill="none" stroke="white" stroke-width=".3" opacity=".2"/>
+          <circle cx="120" cy="150" r="4" fill="white" opacity=".15"/>
+          <circle cx="280" cy="160" r="3" fill="white" opacity=".1"/>
+        </svg>
+        <!-- PHOTO SLIDER 2 : remplacer par votre photo -->
+        <div class="slide-photo-placeholder">
+          <div class="slide-photo-name">U Mare</div>
+          <div class="slide-photo-hint">Photo du sac ici</div>
+        </div>
+      </div>
+      <div class="slide-info">
+        <div class="slide-tag">Collection marine</div>
+        <h2 class="slide-title">U Mare</h2>
+        <p class="slide-desc">Bandoulière crochetée aux teintes de la Méditerranée. Coton recyclé teinté en bleu profond et écume.</p>
+        <div class="slide-price">135 €</div>
+        <button class="slide-btn">Découvrir <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 7h12M8 2l5 5-5 5"/></svg></button>
+      </div>
+    </div>
+
+    <!-- SLIDE 3 — Terre / Ocre -->
+    <div class="slide slide-3">
+      <div class="slide-visual">
+        <div class="slide-visual-bg"></div>
+        <div class="slide-texture"></div>
+        <svg class="slide-pattern" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+          <rect x="120" y="120" width="160" height="160" rx="3" fill="none" stroke="white" stroke-width=".5" opacity=".3"/>
+          <rect x="150" y="150" width="100" height="100" rx="2" fill="none" stroke="white" stroke-width=".5" opacity=".25"/>
+          <rect x="180" y="180" width="40" height="40" fill="white" opacity=".06"/>
+          <line x1="120" y1="200" x2="280" y2="200" stroke="white" stroke-width=".3" opacity=".2"/>
+          <line x1="200" y1="120" x2="200" y2="280" stroke="white" stroke-width=".3" opacity=".2"/>
+        </svg>
+        <!-- PHOTO SLIDER 3 : remplacer par votre photo -->
+        <div class="slide-photo-placeholder">
+          <div class="slide-photo-name">A Petra</div>
+          <div class="slide-photo-hint">Photo du sac ici</div>
+        </div>
+      </div>
+      <div class="slide-info">
+        <div class="slide-tag">Collection granite</div>
+        <h2 class="slide-title">A Petra</h2>
+        <p class="slide-desc">Mini sac aux motifs géométriques inspirés des pierres de Bavella. Crochet texturé en tons terre et miel.</p>
+        <div class="slide-price">95 €</div>
+        <button class="slide-btn">Découvrir <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 7h12M8 2l5 5-5 5"/></svg></button>
+      </div>
+    </div>
+
+    <!-- SLIDE 4 — Immortelle / Or -->
+    <div class="slide slide-4">
+      <div class="slide-visual">
+        <div class="slide-visual-bg"></div>
+        <div class="slide-texture"></div>
+        <svg class="slide-pattern" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+          <path d="M200 100 L210 160 L260 130 L225 175 L290 180 L230 195 L270 230 L215 210 L200 270 L185 210 L130 230 L170 195 L110 180 L175 175 L140 130 L190 160Z" fill="white" opacity=".06" stroke="white" stroke-width=".3" opacity=".3"/>
+          <circle cx="200" cy="190" r="25" fill="none" stroke="white" stroke-width=".5" opacity=".35"/>
+          <circle cx="200" cy="190" r="8" fill="white" opacity=".1"/>
+        </svg>
+        <!-- PHOTO SLIDER 4 : remplacer par votre photo -->
+        <div class="slide-photo-placeholder">
+          <div class="slide-photo-name">A Stella</div>
+          <div class="slide-photo-hint">Photo du sac ici</div>
+        </div>
+      </div>
+      <div class="slide-info">
+        <div class="slide-tag">Collection signature</div>
+        <h2 class="slide-title">A Stella</h2>
+        <p class="slide-desc">Pochette de soirée en fil doré. Notre pièce signature, l'éclat de l'immortelle corse capturé au crochet.</p>
+        <div class="slide-price">145 €</div>
+        <button class="slide-btn">Découvrir <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 7h12M8 2l5 5-5 5"/></svg></button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Slider dots -->
+  <div class="slider-nav" id="sliderNav">
+    <button class="slider-dot active" data-slide="0"></button>
+    <button class="slider-dot" data-slide="1"></button>
+    <button class="slider-dot" data-slide="2"></button>
+    <button class="slider-dot" data-slide="3"></button>
+  </div>
+
+  <!-- Slider arrows -->
+  <div class="slider-arrows">
+    <button class="slider-arrow" id="prevSlide">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 3l-5 5 5 5"/></svg>
+    </button>
+    <button class="slider-arrow" id="nextSlide">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 3l5 5-5 5"/></svg>
+    </button>
+  </div>
+</section>
+
+<!-- ═══ MARQUEE ═══ -->
+<div class="marquee">
+  <div class="marquee-inner">
+    <span>Fait main en Corse</span><span>Crochet artisanal</span><span>Pièces uniques</span><span>Made in France</span><span>Savoir-faire insulaire</span><span>Éco-responsable</span><span>Personnalisable</span><span>Livraison offerte</span>
+    <span>Fait main en Corse</span><span>Crochet artisanal</span><span>Pièces uniques</span><span>Made in France</span><span>Savoir-faire insulaire</span><span>Éco-responsable</span><span>Personnalisable</span><span>Livraison offerte</span>
+  </div>
+</div>
+
+<!-- ═══ INTRO ═══ -->
+<section class="section-padding">
+  <div class="intro reveal">
+    <!-- PHOTO INTRO : remplacer src par votre image principale (800x1000px) -->
+    <div class="intro-visual">
+      <img src="images/sac_1_burgundy_1774856467132.png" alt="Sac U Saku au crochet fait main en Corse" loading="lazy">
+    </div>
+    <div>
+      <p class="section-label">L'essence de U Saku</p>
+      <h2 class="section-title">Là où le maquis<br>rencontre l'élégance</h2>
+      <p class="section-text">Née au cœur de l'Île de Beauté, U Saku célèbre la lenteur et la précision du geste artisanal. Chaque sac est crocheté à la main avec des fils soigneusement choisis, dans le respect des traditions corses et de la nature qui nous entoure.</p>
+      <p class="section-text" style="margin-top:1rem">Du choix du fil à la dernière maille, il faut entre 15 et 40 heures de travail pour donner vie à un seul sac. C'est le temps de la beauté.</p>
+      <div class="intro-stat">
+        <div class="intro-stat-item">
+          <div class="intro-stat-num">100%</div>
+          <div class="intro-stat-label">Fait main</div>
+        </div>
+        <div class="intro-stat-item">
+          <div class="intro-stat-num">15-40h</div>
+          <div class="intro-stat-label">Par pièce</div>
+        </div>
+        <div class="intro-stat-item">
+          <div class="intro-stat-num">Corse</div>
+          <div class="intro-stat-label">Fabrication</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PRODUCTS ═══ -->
+<section class="section-padding products-section" id="collection">
+  <div class="products-header reveal">
+    <div>
+      <p class="section-label">La collection</p>
+      <h2 class="section-title">Pièces d'exception</h2>
+    </div>
+    <a href="#" class="btn-primary" style="align-self:flex-end">Voir tout</a>
+  </div>
+  <div class="products-grid">
+    <!-- PRODUIT 1 — PHOTO : remplacer src (800x1000px) -->
+    <div class="product-card reveal">
+      <div class="product-image">
+        <span class="product-tag">Édition limitée</span>
+        <img src="images/sac_1_burgundy_1774856467132.png" alt="A Machja" loading="lazy">
+      </div>
+      <div class="product-name">A Machja</div>
+      <div class="product-desc">Cabas au crochet — Coton naturel &amp; lin</div>
+      <div class="product-price">120 €</div>
+      <div class="product-action"><span class="product-action-line"></span> Découvrir</div>
+    </div>
+    <!-- PRODUIT 2 — PHOTO : remplacer src -->
+    <div class="product-card reveal">
+      <div class="product-image">
+        <img src="images/sac_2_mustard_1774856480836.png" alt="A Stella" loading="lazy">
+      </div>
+      <div class="product-name">A Stella</div>
+      <div class="product-desc">Pochette de soirée — Fil doré &amp; raphia</div>
+      <div class="product-price">145 €</div>
+      <div class="product-action"><span class="product-action-line"></span> Découvrir</div>
+    </div>
+    <!-- PRODUIT 3 — PHOTO : remplacer src -->
+    <div class="product-card reveal">
+      <div class="product-image">
+        <span class="product-tag">Nouveauté</span>
+        <img src="images/sac_3_multicolor_1774856495474.png" alt="U Mare" loading="lazy">
+      </div>
+      <div class="product-name">U Mare</div>
+      <div class="product-desc">Sac bandoulière — Coton recyclé teint végétal</div>
+      <div class="product-price">135 €</div>
+      <div class="product-action"><span class="product-action-line"></span> Découvrir</div>
+    </div>
+    <!-- PRODUIT 4 — PHOTO : remplacer src -->
+    <div class="product-card reveal">
+      <div class="product-image">
+        <img src="images/sac_4_green_1774856515043.png" alt="A Petra" loading="lazy">
+      </div>
+      <div class="product-name">A Petra</div>
+      <div class="product-desc">Mini sac — Crochet texturé tons terre</div>
+      <div class="product-price">95 €</div>
+      <div class="product-action"><span class="product-action-line"></span> Découvrir</div>
+    </div>
+    <!-- PRODUIT 5 — PHOTO : remplacer src -->
+    <div class="product-card reveal">
+      <div class="product-image">
+        <span class="product-tag">Best-seller</span>
+        <img src="images/sac_5_black_1774856618951.png" alt="A Spassiata" loading="lazy">
+      </div>
+      <div class="product-name">A Spassiata</div>
+      <div class="product-desc">Grand cabas plage — Raphia &amp; coton</div>
+      <div class="product-price">150 €</div>
+      <div class="product-action"><span class="product-action-line"></span> Découvrir</div>
+    </div>
+    <!-- PRODUIT 6 — PHOTO : remplacer src -->
+    <div class="product-card reveal">
+      <div class="product-image">
+        <img src="images/sac_1_burgundy_1774856467132.png" alt="A Luna" loading="lazy">
+      </div>
+      <div class="product-name">A Luna</div>
+      <div class="product-desc">Sac seau — Maille ajourée &amp; doublure lin</div>
+      <div class="product-price">110 €</div>
+      <div class="product-action"><span class="product-action-line"></span> Découvrir</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ LA CORSE, NOTRE INSPIRATION (NOUVEAU) ═══ -->
+<section class="corse-section" id="corse">
+  <div class="corse-header reveal">
+    <p class="section-label">L'île de beauté</p>
+    <h2 class="section-title">La Corse, notre inspiration</h2>
+  </div>
+  <div class="corse-grid">
+    <div class="corse-card corse-card-1 reveal">
+      <svg class="corse-card-deco" width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="40" cy="50" rx="25" ry="18" stroke="white" stroke-width=".8"/>
+        <path d="M40 15 Q42 30 40 45 Q38 30 40 15Z" fill="white" opacity=".4"/>
+        <path d="M25 38 Q32 40 40 45 Q32 42 25 38Z" fill="white" opacity=".3"/>
+        <path d="M55 38 Q48 40 40 45 Q48 42 55 38Z" fill="white" opacity=".3"/>
+      </svg>
+      <div class="corse-eyebrow">Flore insulaire</div>
+      <div class="corse-title">Le maquis corse</div>
+      <div class="corse-desc">Immortelle, myrte, ciste — les couleurs et les parfums du maquis infusent chaque création U Saku, du choix du fil aux teintes naturelles.</div>
+    </div>
+    <div class="corse-card corse-card-2 reveal">
+      <svg class="corse-card-deco" width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M5 45 Q20 30 35 45 Q50 60 65 45 Q75 37 80 40" stroke="white" stroke-width=".8" opacity=".6"/>
+        <path d="M5 55 Q20 42 35 55 Q50 68 65 55 Q75 48 80 50" stroke="white" stroke-width=".5" opacity=".4"/>
+        <path d="M5 65 Q20 55 35 65 Q50 75 65 65" stroke="white" stroke-width=".3" opacity=".25"/>
+      </svg>
+      <div class="corse-eyebrow">Méditerranée</div>
+      <div class="corse-title">Les eaux turquoise</div>
+      <div class="corse-desc">Le bleu de la mer Tyrrhénienne et les calanques sculptées par le temps inspirent nos formes, nos courbes et nos textures.</div>
+    </div>
+    <div class="corse-card corse-card-3 reveal">
+      <svg class="corse-card-deco" width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="15" y="20" width="50" height="40" rx="2" stroke="white" stroke-width=".5" opacity=".4"/>
+        <line x1="15" y1="40" x2="65" y2="40" stroke="white" stroke-width=".3" opacity=".3"/>
+        <line x1="40" y1="20" x2="40" y2="60" stroke="white" stroke-width=".3" opacity=".3"/>
+        <circle cx="28" cy="30" r="3" fill="white" opacity=".15"/>
+        <circle cx="52" cy="50" r="3" fill="white" opacity=".15"/>
+      </svg>
+      <div class="corse-eyebrow">Terroir</div>
+      <div class="corse-title">Pierres &amp; villages</div>
+      <div class="corse-desc">Le granit de Bavella, les châtaigniers centenaires et les villages perchés nous enseignent la force et l'authenticité.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PERSONNALISATION (NOUVEAU) ═══ -->
+<section class="section-padding custom-section" id="personnalisation">
+  <div class="custom-inner">
+    <div class="reveal">
+      <p class="section-label">Sur mesure</p>
+      <h2 class="section-title">Votre sac,<br>votre histoire</h2>
+      <p class="section-text">Chaque sac U Saku peut être personnalisé selon vos envies : couleurs, taille, motifs de crochet. Contactez-moi pour créer ensemble la pièce qui vous ressemble.</p>
+      <a href="#" class="btn-primary" style="margin-top:2rem">Demander une création sur mesure</a>
+    </div>
+    <div class="custom-steps reveal">
+      <div class="custom-step">
+        <div class="custom-step-num">01</div>
+        <div class="custom-step-content">
+          <div class="custom-step-title">Choisissez</div>
+          <div class="custom-step-desc">Couleurs, modèle, taille et détails. Partagez vos envies, je vous guide dans les possibilités.</div>
+        </div>
+      </div>
+      <div class="custom-step">
+        <div class="custom-step-num">02</div>
+        <div class="custom-step-content">
+          <div class="custom-step-title">Je crochète</div>
+          <div class="custom-step-desc">Votre sac prend forme maille après maille dans mon atelier en Corse. 15 à 40 heures de patience et de passion.</div>
+        </div>
+      </div>
+      <div class="custom-step">
+        <div class="custom-step-num">03</div>
+        <div class="custom-step-content">
+          <div class="custom-step-title">Recevez</div>
+          <div class="custom-step-desc">Votre pièce unique, soigneusement emballée, livrée chez vous. Un sac qui ne ressemble à aucun autre.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ STORY BANNER ═══ -->
+<section class="story-banner" id="histoire">
+  <div class="story-bg-pattern"></div>
+  <div class="story-content">
+    <div class="reveal">
+      <p class="story-quote">Chaque maille raconte l'histoire de notre île. Chaque sac porte en lui la lumière de la Méditerranée et la force du maquis corse.</p>
+    </div>
+    <div class="story-right reveal">
+      <p class="section-label">Notre histoire</p>
+      <p class="section-text">Fondée en Corse par une artisane passionnée, U Saku est née d'un désir simple : redonner ses lettres de noblesse au crochet en créant des pièces d'exception, à contre-courant de la mode jetable.</p>
+      <div class="story-values">
+        <div class="value-item">
+          <div class="value-num">100%</div>
+          <div class="value-text">Crochet main</div>
+        </div>
+        <div class="value-item">
+          <div class="value-num">Corse</div>
+          <div class="value-text">Atelier insulaire</div>
+        </div>
+        <div class="value-item">
+          <div class="value-num">Éco</div>
+          <div class="value-text">Fils naturels</div>
+        </div>
+        <div class="value-item">
+          <div class="value-num">Unique</div>
+          <div class="value-text">Pièce numérotée</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SAVOIR-FAIRE ═══ -->
+<section class="section-padding savoir-faire" id="savoir-faire">
+  <div style="text-align:center" class="reveal">
+    <p class="section-label">Le savoir-faire</p>
+    <h2 class="section-title">De la maille à l'exception</h2>
+  </div>
+  <div class="sf-grid">
+    <div class="sf-step reveal">
+      <div class="sf-num">01</div>
+      <div class="sf-name">Le fil</div>
+      <div class="sf-divider"></div>
+      <div class="sf-desc">Sélection rigoureuse de fils naturels : coton, lin, raphia. Chaque matière est choisie pour sa douceur et sa solidité.</div>
+    </div>
+    <div class="sf-step reveal">
+      <div class="sf-num">02</div>
+      <div class="sf-name">Le dessin</div>
+      <div class="sf-divider"></div>
+      <div class="sf-desc">Chaque modèle est imaginé, inspiré des paysages corses, puis traduit en patron de crochet unique.</div>
+    </div>
+    <div class="sf-step reveal">
+      <div class="sf-num">03</div>
+      <div class="sf-name">Le crochet</div>
+      <div class="sf-divider"></div>
+      <div class="sf-desc">Maille après maille, le sac prend forme sous les doigts experts. 15 à 40 heures qui ne tolèrent aucune précipitation.</div>
+    </div>
+    <div class="sf-step reveal">
+      <div class="sf-num">04</div>
+      <div class="sf-name">La finition</div>
+      <div class="sf-divider"></div>
+      <div class="sf-desc">Doublure, anses, détails. Chaque finition est pensée pour sublimer le sac et garantir sa durabilité.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TESTIMONIALS ═══ -->
+<section class="section-padding testimonials" id="temoignages">
+  <div style="text-align:center" class="reveal">
+    <p class="section-label">Ce qu'elles en disent</p>
+    <h2 class="section-title">Avis de nos clientes</h2>
+  </div>
+  <div class="test-grid">
+    <div class="test-card reveal">
+      <div class="test-stars">★★★★★</div>
+      <p class="test-text">Un sac d'une beauté incroyable. On sent le travail artisanal dans chaque détail. Je ne le quitte plus, été comme hiver.</p>
+      <div class="test-author">Marie-Ange C.</div>
+      <div class="test-loc">Ajaccio, Corse</div>
+    </div>
+    <div class="test-card reveal">
+      <div class="test-stars">★★★★★</div>
+      <p class="test-text">J'ai offert le modèle A Stella à ma mère. Elle a pleuré de joie. La pochette est d'une finesse rare, on dirait une œuvre d'art.</p>
+      <div class="test-author">Léa D.</div>
+      <div class="test-loc">Paris, France</div>
+    </div>
+    <div class="test-card reveal">
+      <div class="test-stars">★★★★★</div>
+      <p class="test-text">Enfin une marque qui prend le temps de bien faire. Qualité irréprochable, livraison soignée, et un sac qui fait tourner les têtes !</p>
+      <div class="test-author">Sofia B.</div>
+      <div class="test-loc">Lyon, France</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ NEWSLETTER ═══ -->
+<section class="section-padding newsletter">
+  <div class="reveal">
+    <p class="section-label">Restez connectée</p>
+    <h2 class="section-title">Rejoignez le cercle U Saku</h2>
+    <p class="section-text">Recevez en avant-première nos nouveautés, les coulisses de l'atelier et une remise de 10% sur votre première commande.</p>
+    <div class="newsletter-form">
+      <input type="email" placeholder="Votre adresse email">
+      <button type="submit">S'inscrire</button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ REASSURANCE (une seule fois) ═══ -->
+<section class="section-padding reassurance">
+  <div class="reas-grid reveal">
+    <div class="reas-item">
+      <div class="reas-icon">✦</div>
+      <div class="reas-title">Fait main en Corse</div>
+      <div class="reas-desc">Chaque sac est entièrement crocheté à la main dans notre atelier corse</div>
+    </div>
+    <div class="reas-item">
+      <div class="reas-icon">◈</div>
+      <div class="reas-title">Pièce unique</div>
+      <div class="reas-desc">Chaque création est numérotée, aucun sac n'est identique à un autre</div>
+    </div>
+    <div class="reas-item">
+      <div class="reas-icon">❋</div>
+      <div class="reas-title">Livraison offerte</div>
+      <div class="reas-desc">Expédition gratuite en France métropolitaine et en Corse</div>
+    </div>
+    <div class="reas-item">
+      <div class="reas-icon">♡</div>
+      <div class="reas-title">Personnalisable</div>
+      <div class="reas-desc">Couleurs, taille et motifs sur mesure pour un sac qui vous ressemble</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand">U Saku</div>
+      <p class="footer-tagline">Sacs au crochet faits main en Corse. L'artisanat insulaire au service de l'élégance.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Boutique</h4>
+      <a href="#">Cabas</a>
+      <a href="#">Pochettes</a>
+      <a href="#">Bandoulières</a>
+      <a href="#">Sacs seau</a>
+      <a href="#">Nouveautés</a>
+    </div>
+    <div class="footer-col">
+      <h4>La maison</h4>
+      <a href="#">Notre histoire</a>
+      <a href="#">Savoir-faire</a>
+      <a href="#">Personnalisation</a>
+      <a href="#">Journal</a>
+    </div>
+    <div class="footer-col">
+      <h4>Aide</h4>
+      <a href="#">Livraison</a>
+      <a href="#">Retours</a>
+      <a href="#">Entretien</a>
+      <a href="#">Contact</a>
+      <a href="#">FAQ</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 U Saku — Tous droits réservés — Fait main en Corse avec amour</span>
+    <div class="footer-social">
+      <a href="https://www.instagram.com/usaku_17/" target="_blank">Instagram</a>
+      <a href="#">Pinterest</a>
+      <a href="#">TikTok</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══ BACK TO TOP ═══ -->
+<button class="back-top" id="backTop" aria-label="Retour en haut">
+  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 10l5-5 5 5"/></svg>
+</button>
+
+<script>
+/* Preloader */
+window.addEventListener('load',()=>{
+  setTimeout(()=>document.getElementById('preloader').classList.add('hidden'),1200);
+});
+
+/* Nav scroll + reveal */
+window.addEventListener('scroll',()=>{
+  const nav=document.getElementById('navbar');
+  const scrollY=window.scrollY;
+  nav.classList.toggle('scrolled',scrollY>80);
+
+  document.querySelectorAll('.reveal').forEach(el=>{
+    if(el.getBoundingClientRect().top<window.innerHeight*.88){
+      el.classList.add('visible');
+    }
+  });
+
+  /* Back to top */
+  document.getElementById('backTop').classList.toggle('visible',scrollY>600);
+});
+
+/* Smooth scroll */
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    e.preventDefault();
+    const t=document.querySelector(a.getAttribute('href'));
+    if(t)t.scrollIntoView({behavior:'smooth'});
+    /* close mobile menu if open */
+    document.getElementById('navLinks').classList.remove('show');
+  });
+});
+
+/* Mobile menu */
+document.getElementById('mobileMenu').addEventListener('click',()=>{
+  document.getElementById('navLinks').classList.toggle('show');
+});
+
+/* Back to top click */
+document.getElementById('backTop').addEventListener('click',()=>{
+  window.scrollTo({top:0,behavior:'smooth'});
+});
+
+/* ═══ SLIDER ═══ */
+const track=document.getElementById('sliderTrack');
+const dots=document.querySelectorAll('.slider-dot');
+const totalSlides=4;
+let current=0;
+let autoplayTimer;
+
+function goToSlide(n){
+  current=((n%totalSlides)+totalSlides)%totalSlides;
+  track.style.transform=`translateX(-${current*100}%)`;
+  dots.forEach((d,i)=>d.classList.toggle('active',i===current));
+}
+
+document.getElementById('nextSlide').addEventListener('click',()=>{goToSlide(current+1);resetAutoplay();});
+document.getElementById('prevSlide').addEventListener('click',()=>{goToSlide(current-1);resetAutoplay();});
+dots.forEach(d=>d.addEventListener('click',()=>{goToSlide(parseInt(d.dataset.slide));resetAutoplay();}));
+
+/* Autoplay */
+function startAutoplay(){autoplayTimer=setInterval(()=>goToSlide(current+1),5000);}
+function resetAutoplay(){clearInterval(autoplayTimer);startAutoplay();}
+startAutoplay();
+
+const heroSlider=document.getElementById('heroSlider');
+heroSlider.addEventListener('mouseenter',()=>clearInterval(autoplayTimer));
+heroSlider.addEventListener('mouseleave',startAutoplay);
+
+/* Touch/swipe support */
+let touchStartX=0;
+let touchEndX=0;
+heroSlider.addEventListener('touchstart',e=>{touchStartX=e.changedTouches[0].screenX;},{passive:true});
+heroSlider.addEventListener('touchend',e=>{
+  touchEndX=e.changedTouches[0].screenX;
+  const diff=touchStartX-touchEndX;
+  if(Math.abs(diff)>50){
+    if(diff>0)goToSlide(current+1);
+    else goToSlide(current-1);
+    resetAutoplay();
+  }
+},{passive:true});
+
+/* Keyboard support */
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'){goToSlide(current+1);resetAutoplay();}
+  if(e.key==='ArrowLeft'){goToSlide(current-1);resetAutoplay();}
+});
+</script>
+</body>
+</html>
