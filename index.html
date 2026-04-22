@@ -145,10 +145,6 @@ a:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:2
 .intro-section.intro-no-visual .intro-quote{padding-left:0;border-left:none;border-top:1px solid var(--gold);border-bottom:1px solid var(--gold);padding:1.5rem 0;max-width:100%}
 .intro-section.intro-no-visual .intro-text{margin-left:auto;margin-right:auto}
 .intro-section.intro-no-visual .intro-stats{justify-content:center}
-.intro-visual{position:relative;overflow:hidden;background:var(--navy)}
-.intro-visual img{width:100%;height:100%;object-fit:cover;opacity:.8;transition:transform 1.2s cubic-bezier(.22,1,.36,1)}
-.intro-visual:hover img{transform:scale(1.05)}
-.intro-visual-overlay{position:absolute;inset:0;background:linear-gradient(to right,transparent 70%,var(--cream) 100%)}
 .intro-content{display:flex;flex-direction:column;justify-content:center;padding:clamp(3rem,6vw,6rem);background:var(--cream)}
 .intro-quote{font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.8rem);font-weight:300;color:var(--navy);line-height:1.4;font-style:italic;margin-bottom:2rem;position:relative;padding-left:2rem;border-left:2px solid var(--gold);text-wrap:balance}
 .intro-text{font-size:.95rem;line-height:2;color:#777;font-weight:300;margin-bottom:2.5rem;max-width:440px;hyphens:auto}
@@ -255,6 +251,13 @@ a:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:2
 .newsletter-form input::placeholder{color:#bbb}
 .newsletter-form button{padding:1rem 2rem;background:var(--navy);color:var(--white);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;font-weight:400;transition:background .3s;border:none}
 .newsletter-form button:hover{background:var(--terracotta)}
+
+/* ═══ UTILITIES ═══ */
+.text-center{text-align:center}
+.section-title-sm{font-family:var(--serif);font-size:clamp(2rem,4vw,3.2rem);font-weight:300;color:var(--navy);line-height:1.2}
+.section-text-lg{font-size:.95rem;line-height:1.9;color:#666;font-weight:300;max-width:440px;margin-top:1.5rem}
+.mt-2{margin-top:2rem}
+.newsletter-msg{margin-top:1rem;font-size:.8rem;color:var(--olive-dark);min-height:1.2rem}
 
 /* ═══ REASSURANCE ═══ */
 .reassurance{background:var(--white);padding:clamp(4rem,8vw,6rem) clamp(2rem,5vw,6rem);border-top:1px solid rgba(0,0,0,.04)}
@@ -378,7 +381,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.5);padding:clamp(3rem,6vw,
   <div class="hero-bg"></div>
   <div class="hero-grain"></div>
   <div class="hero-glow"></div>
-  <div class="particles" id="particles"></div>
+  <div class="particles" id="particles" aria-hidden="true"></div>
   <div class="hero-content">
     <p class="hero-label">Artisanat corse depuis 2024</p>
     <h1 class="hero-title">L'art du <em>crochet</em> <span aria-hidden="true"><br></span>fait main</h1>
@@ -620,9 +623,9 @@ footer{background:var(--navy);color:rgba(255,255,255,.5);padding:clamp(3rem,6vw,
   <div class="custom-inner">
     <div class="reveal">
       <p class="section-label">Sur mesure</p>
-      <h2 class="section-title" style="font-family:var(--serif);font-size:clamp(2rem,4vw,3.2rem);font-weight:300;color:var(--navy);line-height:1.2">Votre sac,<br>votre histoire</h2>
-      <p style="font-size:.95rem;line-height:1.9;color:#666;font-weight:300;max-width:440px;margin-top:1.5rem">Chaque sac U Saku peut être personnalisé selon vos envies : couleurs, taille, motifs de crochet. Contactez-moi pour créer ensemble la pièce qui vous ressemble.</p>
-      <a href="#" class="btn-primary" style="margin-top:2rem">Demander une création sur mesure</a>
+      <h2 class="section-title-sm">Votre sac,<br>votre histoire</h2>
+      <p class="section-text-lg">Chaque sac U Saku peut être personnalisé selon vos envies : couleurs, taille, motifs de crochet. Contactez-moi pour créer ensemble la pièce qui vous ressemble.</p>
+      <a href="#" class="btn-primary mt-2">Demander une création sur mesure</a>
     </div>
     <div class="custom-steps reveal reveal-delay-1">
       <div class="custom-step">
@@ -709,7 +712,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.5);padding:clamp(3rem,6vw,
 
 <!-- ═══ SAVOIR-FAIRE ═══ -->
 <section class="savoir-faire" id="savoir-faire">
-  <div style="text-align:center" class="reveal">
+  <div class="text-center reveal">
     <p class="section-label">Le savoir-faire</p>
     <h2 class="section-title">De la maille à l'exception</h2>
   </div>
@@ -743,7 +746,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.5);padding:clamp(3rem,6vw,
 
 <!-- ═══ TESTIMONIALS ═══ -->
 <section class="testimonials" id="temoignages">
-  <div style="text-align:center" class="reveal">
+  <div class="text-center reveal">
     <p class="section-label">Ce qu'elles en disent</p>
     <h2 class="section-title">Avis de nos clientes</h2>
   </div>
@@ -780,7 +783,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.5);padding:clamp(3rem,6vw,
       <input type="email" id="newsletter-email" name="email" autocomplete="email" placeholder="Votre adresse email…" required>
       <button type="submit">S'inscrire</button>
     </form>
-    <p id="newsletterMsg" role="status" aria-live="polite" style="margin-top:1rem;font-size:.8rem;color:var(--olive-dark);min-height:1.2rem"></p>
+    <p id="newsletterMsg" class="newsletter-msg" role="status" aria-live="polite"></p>
   </div>
 </section>
 
@@ -845,19 +848,22 @@ window.addEventListener('load', () => {
 const dot = document.getElementById('cursorDot');
 const ring = document.getElementById('cursorRing');
 if (!reduceMotion && !isCoarse) {
-  let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
-  document.addEventListener('mousemove', e => {
-    mouseX = e.clientX; mouseY = e.clientY;
-    dot.style.left = mouseX - 4 + 'px';
-    dot.style.top = mouseY - 4 + 'px';
-  });
-  (function animateRing() {
+  let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0, ringRunning = false;
+  function animateRing() {
     ringX += (mouseX - ringX) * 0.12;
     ringY += (mouseY - ringY) * 0.12;
     ring.style.left = ringX - 20 + 'px';
     ring.style.top = ringY - 20 + 'px';
-    requestAnimationFrame(animateRing);
-  })();
+    if (Math.abs(mouseX - ringX) > 0.5 || Math.abs(mouseY - ringY) > 0.5) {
+      requestAnimationFrame(animateRing);
+    } else { ringRunning = false; }
+  }
+  document.addEventListener('mousemove', e => {
+    mouseX = e.clientX; mouseY = e.clientY;
+    dot.style.left = mouseX - 4 + 'px';
+    dot.style.top = mouseY - 4 + 'px';
+    if (!ringRunning) { ringRunning = true; requestAnimationFrame(animateRing); }
+  });
   document.querySelectorAll('a, button, .product-card, .carousel-item').forEach(el => {
     el.addEventListener('mouseenter', () => ring.classList.add('hover'));
     el.addEventListener('mouseleave', () => ring.classList.remove('hover'));
@@ -1018,8 +1024,12 @@ container.addEventListener('touchend', e => {
 container.addEventListener('mouseenter', () => clearInterval(autoTimer));
 container.addEventListener('mouseleave', startAuto);
 
-// Keyboard
+// Keyboard (only when carousel is in viewport)
+let carouselInView = false;
+const carouselIO = new IntersectionObserver(([entry]) => { carouselInView = entry.isIntersecting; });
+carouselIO.observe(container);
 document.addEventListener('keydown', e => {
+  if (!carouselInView) return;
   if (e.key === 'ArrowRight') { goTo(current + 1); resetAuto(); }
   if (e.key === 'ArrowLeft') { goTo(current - 1); resetAuto(); }
 });
@@ -1028,8 +1038,9 @@ document.addEventListener('keydown', e => {
 updateCarousel();
 startAuto();
 
-// Resize handler
-window.addEventListener('resize', updateCarousel);
+// Resize handler (debounced)
+let resizeTimer;
+window.addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(updateCarousel, 150); });
 
 /* ═══ PSEUDO-3D TILT (carousel + product cards) ═══ */
 if (!reduceMotion) {
